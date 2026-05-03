@@ -3,7 +3,6 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap');
 
-/* FONDO */
 .header-bg {
     background: linear-gradient(rgba(255,255,255,0.92), rgba(255,255,255,0.92)),
     url('https://www.transparenttextures.com/patterns/bubbles.png');
@@ -35,13 +34,6 @@
     border-radius: 10px;
     color: #fff;
     font-size: 18px;
-    transition: 0.3s;
-}
-
-.top-left a:hover {
-    transform: translateY(-3px) scale(1.08);
-    background: #0095d1;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
 }
 
 /* LOGO */
@@ -61,28 +53,21 @@
     font-size: 24px;
 }
 
-/* TEXTO */
 .call-text {
     font-size: 13px;
     font-weight: 600;
 }
 
-/* NUMEROS */
 .phone-group {
     display: flex;
     flex-direction: column;
 }
 
 .phone {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 800;
     color: #020001;
     text-decoration: none;
-    transition: 0.3s;
-}
-
-.phone:hover {
-    color: #00aeee;
 }
 
 /* NAVBAR */
@@ -96,10 +81,11 @@
     padding: 20px 40px;
     display: flex;
     justify-content: center;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    align-items: center;
+    position: relative;
 }
 
-/* MENU */
+/* MENU DESKTOP */
 .menu {
     display: flex;
     gap: 45px;
@@ -110,33 +96,62 @@
     color: #020001;
     font-size: 17px;
     font-weight: 800;
-    letter-spacing: 0.5px;
-    position: relative;
+}
+
+/* HAMBURGUESA */
+.menu-toggle {
+    display: none;
+    font-size: 26px;
+    cursor: pointer;
+}
+
+/* MOBILE MENU */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 75%;
+    height: 100%;
+    background: #ffffff;
+    box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    gap: 25px;
+    transition: 0.4s;
+    z-index: 999;
+}
+
+.mobile-menu a {
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 700;
+    color: #020001;
+}
+
+.mobile-menu.active {
+    right: 0;
+}
+
+/* OVERLAY */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    opacity: 0;
+    pointer-events: none;
     transition: 0.3s;
+    z-index: 998;
 }
 
-/* HOVER */
-.menu a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -8px;
-    width: 0%;
-    height: 3px;
-    background: #00aeee;
-    transition: 0.3s;
-}
-
-.menu a:hover {
-    color: #00aeee;
-}
-
-.menu a:hover::after {
-    width: 100%;
+.overlay.active {
+    opacity: 1;
+    pointer-events: all;
 }
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
+
     .top-bar {
         flex-direction: column;
         gap: 15px;
@@ -149,10 +164,15 @@
     }
 
     .menu {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 20px;
+        display: none;
     }
+
+    .menu-toggle {
+        display: block;
+        position: absolute;
+        right: 20px;
+    }
+
 }
 </style>
 
@@ -161,29 +181,24 @@
     <!-- TOP -->
     <div class="top-bar">
 
-        <!-- REDES -->
         <div class="top-left">
             <a href="#"><i class="fab fa-facebook-f"></i></a>
             <a href="#"><i class="fab fa-tiktok"></i></a>
             <a href="#"><i class="fab fa-instagram"></i></a>
         </div>
 
-        <!-- LOGO -->
         <div class="logo-center">
-            <img src="https://pandcplumbing.com/wp-content/uploads/2025/04/Diseno-sin-titulo-2.png" alt="Logo">
+            <img src="https://pandcplumbing.com/wp-content/uploads/2025/04/Diseno-sin-titulo-2.png">
         </div>
 
-        <!-- TELÉFONOS -->
         <div class="top-right">
             <i class="fas fa-phone phone-icon"></i>
             <div>
                 <div class="call-text">CALL US NOW</div>
-
                 <div class="phone-group">
                     <a href="tel:+13057130381" class="phone">+1 (305) 713-0381</a>
                     <a href="tel:+13056840149" class="phone">+1 (305) 684-0149</a>
                 </div>
-
             </div>
         </div>
 
@@ -200,11 +215,32 @@
                 <a href="#">Testimonials</a>
             </div>
 
+            <!-- HAMBURGUESA -->
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+
         </div>
     </div>
 
 </div>
 
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#">Home</a>
+    <a href="#">About Us</a>
+    <a href="#">Services</a>
+    <a href="#">Testimonials</a>
+</div>
+
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+<script>
+function toggleMenu() {
+    document.getElementById("mobileMenu").classList.toggle("active");
+    document.getElementById("overlay").classList.toggle("active");
+}
+</script>
 <!-- FONT + ICONS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 

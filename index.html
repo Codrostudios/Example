@@ -1,75 +1,832 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Catálogo Inbasik</title>
-  <style>
-    body { font-family: sans-serif; margin: 0; padding: 1rem; background: #f9f9f9; }
-    header { text-align: center; padding: 1rem; background: #222; color: #fff; }
-    input, select { padding: 0.5rem; font-size: 1rem; margin-bottom: 1rem; width: 100%; max-width: 400px; }
-    .producto { background: #fff; border: 1px solid #ddd; padding: 1rem; margin-bottom: 1rem; border-radius: 6px; display: flex; flex-direction: column; align-items: center; text-align: center; }
-    .producto h3 { margin-top: 0.5rem; }
-    .precio { font-weight: bold; color: #444; }
-    .codigo { font-size: 0.9rem; color: #777; }
-    .producto img { width: 500px; height: 500px; object-fit: cover; border-radius: 4px; }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>Catálogo Inbasik - Temporada 2</h1>
-    <input type="text" id="buscador" placeholder="Buscar por nombre o código..." onkeyup="filtrarProductos()">
-  </header>
-  <main id="lista-productos">
-    <!-- Productos -->
-    <div class="producto">
-      <img src="img/oversize-black.jpg" alt="Camiseta Oversize Negro">
-      <h3>Camiseta Oversize Color Negro</h3>
-      <p class="codigo">Código: OV 1</p>
-      <p class="precio">Precio: $40.000 (1 unidad)</p>
-    </div>
-    <div class="producto">
-      <img src="img/oversize-white.jpg" alt="Camiseta Oversize Blanco">
-      <h3>Camiseta Oversize Color Blanco</h3>
-      <p class="codigo">Código: OV 2</p>
-      <p class="precio">Precio: $40.000 (1 unidad)</p>
-    </div>
-    <div class="producto">
-      <img src="img/urban-tank-black.jpg" alt="Urban Fit Negro">
-      <h3>Urban Fit Color Negro</h3>
-      <p class="codigo">Código: URB 01</p>
-      <p class="precio">Precio: $55.000 (1 unidad)</p>
-    </div>
-    <div class="producto">
-      <img src="img/drop-terry.jpg" alt="Drop Terry Blanco">
-      <h3>Drop Terry Oversize Blanco</h3>
-      <p class="codigo">Código: 33001</p>
-      <p class="precio">Precio: $50.000 (1 unidad)</p>
-    </div>
-    <div class="producto">
-      <img src="img/BUZO-OERSIZE-NEGRO.jpg" alt="Buzo Oversize Negro">
-      <h3>Buzo Oversize Color Negro</h3>
-      <p class="codigo">Código: BOV1</p>
-      <p class="precio">Precio: $65.000 (1 unidad)</p>
-    </div>
-    <div class="producto">
-      <img src="img/ACID-WASH.jpg" alt="Hoodie Acid Wash Azul Petróleo">
-      <h3>Hoodie Acid Wash Negro</h3>
-      <p class="codigo">Código: HDAW02</p>
-      <p class="precio">Precio: $110.000 (1 unidad)</p>
-    </div>
-    <!-- Más productos aquí... -->
-  </main>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <script>
-    function filtrarProductos() {
-      const input = document.getElementById('buscador').value.toLowerCase();
-      const productos = document.querySelectorAll('.producto');
-      productos.forEach(prod => {
-        const texto = prod.textContent.toLowerCase();
-        prod.style.display = texto.includes(input) ? 'block' : 'none';
-      });
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap');
+
+/* FONDO */
+.header-bg {
+    background: linear-gradient(rgba(255,255,255,0.92), rgba(255,255,255,0.92)),
+    url('https://www.transparenttextures.com/patterns/bubbles.png');
+    padding-bottom: 25px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* TOP */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 80px;
+}
+
+/* REDES */
+.top-left {
+    display: flex;
+    gap: 15px;
+}
+
+.top-left a {
+    width: 44px;
+    height: 44px;
+    background: #00aeee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.top-left a:hover {
+    transform: translateY(-3px) scale(1.08);
+    background: #0095d1;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+/* LOGO */
+.logo-center img {
+    height: 70px;
+}
+
+/* TEL */
+.top-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.phone-icon {
+    color: #00aeee;
+    font-size: 24px;
+}
+
+/* TEXTO */
+.call-text {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* NUMEROS */
+.phone-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.phone {
+    font-size: 20px;
+    font-weight: 800;
+    color: #020001;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.phone:hover {
+    color: #00aeee;
+}
+
+/* NAVBAR */
+.navbar-wrapper {
+    padding: 15px 80px;
+}
+
+.navbar {
+    background: #f1f1f1;
+    border-radius: 60px;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+/* MENU */
+.menu {
+    display: flex;
+    gap: 45px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #020001;
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    position: relative;
+    transition: 0.3s;
+}
+
+/* HOVER */
+.menu a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 0%;
+    height: 3px;
+    background: #00aeee;
+    transition: 0.3s;
+}
+
+.menu a:hover {
+    color: #00aeee;
+}
+
+.menu a:hover::after {
+    width: 100%;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .top-bar {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+        padding: 20px;
     }
-  </script>
-</body>
-</html>
+
+    .navbar-wrapper {
+        padding: 10px 20px;
+    }
+
+    .menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+}
+</style>
+
+<div class="header-bg">
+
+    <!-- TOP -->
+    <div class="top-bar">
+
+        <!-- REDES -->
+        <div class="top-left">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+
+        <!-- LOGO -->
+        <div class="logo-center">
+            <img src="https://pandcplumbing.com/wp-content/uploads/2025/04/Diseno-sin-titulo-2.png" alt="Logo">
+        </div>
+
+        <!-- TELÉFONOS -->
+        <div class="top-right">
+            <i class="fas fa-phone phone-icon"></i>
+            <div>
+                <div class="call-text">CALL US NOW</div>
+
+                <div class="phone-group">
+                    <a href="tel:+13057130381" class="phone">+1 (305) 713-0381</a>
+                    <a href="tel:+13056840149" class="phone">+1 (305) 684-0149</a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- NAVBAR -->
+    <div class="navbar-wrapper">
+        <div class="navbar">
+
+            <div class="menu">
+                <a href="#">Home</a>
+                <a href="#">About Us</a>
+                <a href="#">Services</a>
+                <a href="#">Testimonials</a>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- FONT + ICONS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+
+/* HERO BASE */
+.hero-pro {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 100px 80px 140px;
+    font-family: 'Inter', sans-serif;
+    color: #fff;
+    overflow: hidden;
+    gap: 60px;
+
+    /* AZUL SÓLIDO */
+    background: #00aeee;
+}
+
+/* PARTÍCULAS SUAVES */
+.hero-pro::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.4;
+}
+
+/* TRANSICIÓN SUAVE ABAJO */
+.hero-pro::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background: #ffffff;
+    border-top-left-radius: 100% 80px;
+    border-top-right-radius: 100% 80px;
+}
+
+/* GLASS BOX */
+.glass-box {
+    backdrop-filter: blur(14px);
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 40px;
+}
+
+/* TEXTO */
+.hero-left {
+    width: 50%;
+    z-index: 2;
+}
+
+.hero-left h1 {
+    font-size: 52px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.hero-left p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: rgba(255,255,255,0.9);
+}
+
+/* FEATURES */
+.hero-features div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    color: #ffffff;
+}
+
+.hero-features i {
+    color: #ffffff;
+}
+
+/* BOTONES */
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.btn {
+    padding: 15px 28px;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+/* BOTÓN PRINCIPAL */
+.btn-primary {
+    background: #ffffff;
+    color: #00aeee;
+}
+
+.btn-primary:hover {
+    background: #eaeaea;
+    transform: translateY(-2px);
+}
+
+/* BOTÓN SECUNDARIO */
+.btn-secondary {
+    border: 2px solid #ffffff;
+    color: #ffffff;
+}
+
+.btn-secondary:hover {
+    background: #ffffff;
+    color: #00aeee;
+}
+
+/* TELÉFONO */
+.phone-text {
+    margin-top: 20px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.95);
+}
+
+/* VIDEO */
+.hero-right {
+    width: 45%;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.hero-right video {
+    width: 100%;
+    border-radius: 20px;
+}
+
+/* OVERLAY */
+.hero-right::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.25);
+    border-radius: 20px;
+}
+
+/* PLAY */
+.play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    color: #00aeee;
+    padding: 18px 22px;
+    border-radius: 50%;
+    font-size: 22px;
+    z-index: 3;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .hero-pro {
+        flex-direction: column;
+        text-align: center;
+        padding: 60px 20px 120px;
+    }
+
+    .hero-left, .hero-right {
+        width: 100%;
+    }
+
+    .hero-left h1 {
+        font-size: 32px;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+}
+</style>
+
+<section class="hero-pro">
+
+    <!-- TEXTO -->
+    <div class="hero-left glass-box">
+
+        <h1>
+        ELITE PLUMBING<br>
+        SOLUTIONS IN SOUTH FLORIDA
+        </h1>
+
+        <p>
+        P &C delivers elite, full-service plumbing solutions with reliability you can depend on.
+        Serving all South Florida.
+        </p>
+
+        <div class="hero-features">
+            <div><i class="fas fa-check-circle"></i> 24/7 Emergency</div>
+            <div><i class="fas fa-check-circle"></i> Residential & Commercial</div>
+            <div><i class="fas fa-check-circle"></i> Fast Response</div>
+        </div>
+
+        <div class="hero-buttons">
+            <a href="tel:+13057130381" class="btn btn-primary">CALL NOW</a>
+            <a href="#quote" class="btn btn-secondary">GET A QUOTE</a>
+        </div>
+
+        <p class="phone-text">
+        +1 (305) 713-0381 or +1 (305) 684-0149
+        </p>
+
+    </div>
+
+    <!-- VIDEO -->
+    <div class="hero-right" onclick="playHeroVideo()">
+        <video id="heroVideo" poster="https://via.placeholder.com/800x500">
+            <source src="TU_VIDEO_AQUI.mp4" type="video/mp4">
+        </video>
+        <div class="play-btn">▶</div>
+    </div>
+
+</section>
+
+<script>
+function playHeroVideo(){
+    const v = document.getElementById("heroVideo");
+    v.play();
+    v.muted = false;
+}
+</script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+
+.about-clean {
+    padding: 100px 60px;
+    background: #ffffff;
+    font-family: 'Inter', sans-serif;
+}
+
+/* CONTENEDOR */
+.about-container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* GRID */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+/* GLASS SUAVE */
+.glass-box {
+    backdrop-filter: blur(10px);
+    background: rgba(0,174,238,0.05);
+    border: 1px solid rgba(0,174,238,0.15);
+    border-radius: 20px;
+    padding: 40px;
+
+    /* ANIMACIÓN */
+    opacity: 0;
+    transform: translateX(-60px);
+    animation: fadeLeft 1s ease forwards;
+}
+
+/* TEXTO */
+.glass-box h2 {
+    font-size: 40px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: #020001;
+}
+
+.glass-box p {
+    font-size: 17px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: #444;
+}
+
+/* DESTACADOS */
+.highlight {
+    color: #00aeee;
+    font-weight: 600;
+}
+
+/* IMAGEN */
+.about-image {
+    opacity: 0;
+    transform: translateX(60px);
+    animation: fadeRight 1s ease forwards;
+}
+
+.about-image img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+}
+
+/* ANIMACIONES */
+@keyframes fadeLeft {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeRight {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .about-clean {
+        padding: 60px 20px;
+    }
+
+    .glass-box h2 {
+        font-size: 28px;
+        text-align: center;
+    }
+
+    .glass-box p {
+        text-align: center;
+    }
+}
+</style>
+
+<section class="about-clean">
+
+    <div class="about-container">
+
+        <div class="about-grid">
+
+            <!-- TEXTO -->
+            <div class="glass-box">
+
+                <h2>About P&C Plumbing</h2>
+
+                <p>
+                    At <span class="highlight">P&C Plumbing</span>, we believe in doing things differently. 
+                    With over <span class="highlight">two decades of experience</span> in residential, commercial, and industrial plumbing, 
+                    we've built a reputation for <span class="highlight">trust, speed, and unmatched quality</span>.
+                </p>
+
+                <p>
+                    Whether it's an emergency at <span class="highlight">2 AM</span> or a full remodeling project, 
+                    our team shows up with the right tools, the right attitude, and the right solutions — every time.
+                </p>
+
+                <p>
+                    We're proud to serve the <span class="highlight">South Florida community</span> with 
+                    <span class="highlight">bilingual service (English & Spanish)</span>, competitive pricing, 
+                    and a personal touch that larger companies simply can’t match.
+                </p>
+
+            </div>
+
+            <!-- IMAGEN -->
+            <div class="about-image">
+                <img src="https://via.placeholder.com/600x500" alt="Replace with real image">
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<style>
+.before-after-section {
+    padding: 100px 20px;
+    background: #ffffff;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+}
+
+.ba-container {
+    max-width: 700px; /* 🔥 más estrecho = más elegante */
+    margin: auto;
+}
+
+.ba-title {
+    font-size: 34px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.ba-sub {
+    color: #666;
+    margin-bottom: 50px;
+}
+
+/* 🔥 STACK VERTICAL */
+.ba-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+/* CARD */
+.ba-card {
+    background: #f5f7fa;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+/* SLIDER */
+.ba-slider {
+    position: relative;
+    width: 100%;
+    height: 420px;
+    overflow: hidden;
+    border-radius: 15px;
+    cursor: ew-resize;
+}
+
+/* IMÁGENES */
+.ba-slider img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+/* AFTER */
+.ba-after {
+    position: absolute;
+    inset: 0;
+    clip-path: inset(0 50% 0 0);
+}
+
+/* LÍNEA */
+.ba-line {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 3px;
+    height: 100%;
+    background: #00aeee;
+    z-index: 3;
+}
+
+/* BOTÓN */
+.ba-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #00aeee;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: bold;
+    z-index: 4;
+}
+
+/* LABELS */
+.ba-label {
+    position: absolute;
+    top: 15px;
+    padding: 8px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 30px;
+    z-index: 5;
+}
+
+.ba-before-label {
+    left: 15px;
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+}
+
+.ba-after-label {
+    right: 15px;
+    background: #00aeee;
+    color: #fff;
+}
+
+.ba-card h3 {
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: 700;
+}
+</style>
+
+<section class="before-after-section">
+
+    <div class="ba-container">
+
+        <h2 class="ba-title">Our Work Speaks for Itself</h2>
+        <p class="ba-sub">Real transformations across South Florida.</p>
+
+        <div class="ba-grid">
+
+            <!-- CARD 1 -->
+            <div class="ba-card">
+                <div class="ba-slider" data-slider>
+
+                    <img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae">
+
+                    <div class="ba-after">
+                        <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea">
+                    </div>
+
+                    <div class="ba-line"></div>
+                    <div class="ba-circle">⇄</div>
+
+                    <span class="ba-label ba-before-label">BEFORE</span>
+                    <span class="ba-label ba-after-label">AFTER</span>
+
+                </div>
+
+                <h3>Bathroom Renovation</h3>
+            </div>
+
+            <!-- CARD 2 -->
+            <div class="ba-card">
+                <div class="ba-slider" data-slider>
+
+                    <img src="https://images.unsplash.com/photo-1556912173-3bb406ef7e77">
+
+                    <div class="ba-after">
+                        <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2">
+                    </div>
+
+                    <div class="ba-line"></div>
+                    <div class="ba-circle">⇄</div>
+
+                    <span class="ba-label ba-before-label">BEFORE</span>
+                    <span class="ba-label ba-after-label">AFTER</span>
+
+                </div>
+
+                <h3>Kitchen Upgrade</h3>
+            </div>
+
+            <!-- CARD 3 -->
+            <div class="ba-card">
+                <div class="ba-slider" data-slider>
+
+                    <img src="https://images.unsplash.com/photo-1621905251918-48416bd8575a">
+
+                    <div class="ba-after">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c">
+                    </div>
+
+                    <div class="ba-line"></div>
+                    <div class="ba-circle">⇄</div>
+
+                    <span class="ba-label ba-before-label">BEFORE</span>
+                    <span class="ba-label ba-after-label">AFTER</span>
+
+                </div>
+
+                <h3>Pipe Repair</h3>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<script>
+document.querySelectorAll('[data-slider]').forEach(slider => {
+    const after = slider.querySelector('.ba-after');
+    const line = slider.querySelector('.ba-line');
+    const circle = slider.querySelector('.ba-circle');
+
+    function update(x) {
+        const rect = slider.getBoundingClientRect();
+        let percent = ((x - rect.left) / rect.width) * 100;
+        percent = Math.max(0, Math.min(100, percent));
+
+        after.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
+        line.style.left = percent + "%";
+        circle.style.left = percent + "%";
+    }
+
+    let dragging = false;
+
+    slider.addEventListener('mousedown', () => dragging = true);
+    window.addEventListener('mouseup', () => dragging = false);
+
+    window.addEventListener('mousemove', e => {
+        if (dragging) update(e.clientX);
+    });
+
+    slider.addEventListener('touchstart', e => {
+        dragging = true;
+        update(e.touches[0].clientX);
+    });
+
+    slider.addEventListener('touchmove', e => {
+        if (dragging) update(e.touches[0].clientX);
+    });
+
+    window.addEventListener('touchend', () => dragging = false);
+});
+</script>

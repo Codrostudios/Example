@@ -3,11 +3,16 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap');
 
-.header-bg {
-    background: linear-gradient(rgba(255,255,255,0.92), rgba(255,255,255,0.92)),
-    url('https://www.transparenttextures.com/patterns/bubbles.png');
-    padding-bottom: 25px;
+body {
+    margin: 0;
     font-family: 'Montserrat', sans-serif;
+}
+
+/* HEADER */
+.header-bg {
+    background: linear-gradient(rgba(255,255,255,0.95), rgba(255,255,255,0.95)),
+    url('https://www.transparenttextures.com/patterns/bubbles.png');
+    padding-bottom: 20px;
 }
 
 /* TOP */
@@ -15,93 +20,80 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 80px;
+    padding: 20px 60px;
 }
 
 /* REDES */
 .top-left {
     display: flex;
-    gap: 15px;
+    gap: 12px;
 }
 
 .top-left a {
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     background: #00aeee;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 10px;
+    border-radius: 8px;
     color: #fff;
-    font-size: 18px;
 }
 
 /* LOGO */
 .logo-center img {
-    height: 70px;
+    height: 65px;
 }
 
 /* TEL */
 .top-right {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
 }
 
 .phone-icon {
     color: #00aeee;
-    font-size: 24px;
-}
-
-.call-text {
-    font-size: 13px;
-    font-weight: 600;
-}
-
-.phone-group {
-    display: flex;
-    flex-direction: column;
 }
 
 .phone {
-    font-size: 18px;
     font-weight: 800;
     color: #020001;
     text-decoration: none;
 }
 
-/* NAVBAR */
+/* NAV */
 .navbar-wrapper {
-    padding: 15px 80px;
+    padding: 10px 60px;
 }
 
 .navbar {
     background: #f1f1f1;
-    border-radius: 60px;
-    padding: 20px 40px;
+    border-radius: 50px;
+    padding: 15px 30px;
     display: flex;
     justify-content: center;
-    align-items: center;
     position: relative;
 }
 
 /* MENU DESKTOP */
 .menu {
     display: flex;
-    gap: 45px;
+    gap: 35px;
 }
 
 .menu a {
     text-decoration: none;
-    color: #020001;
-    font-size: 17px;
     font-weight: 800;
+    color: #020001;
 }
 
 /* HAMBURGUESA */
 .menu-toggle {
     display: none;
-    font-size: 26px;
+    position: absolute;
+    right: 20px;
+    font-size: 24px;
     cursor: pointer;
 }
 
@@ -110,23 +102,22 @@
     position: fixed;
     top: 0;
     right: -100%;
-    width: 75%;
+    width: 80%;
     height: 100%;
     background: #ffffff;
-    box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+    padding: 50px 30px;
     display: flex;
     flex-direction: column;
-    padding: 40px;
     gap: 25px;
     transition: 0.4s;
     z-index: 999;
 }
 
 .mobile-menu a {
-    text-decoration: none;
-    font-size: 20px;
-    font-weight: 700;
+    font-size: 22px;
+    font-weight: 800;
     color: #020001;
+    text-decoration: none;
 }
 
 .mobile-menu.active {
@@ -149,18 +140,41 @@
     pointer-events: all;
 }
 
+/* BOTÓN FIJO MOBILE */
+.call-fixed {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #00aeee;
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 50px;
+    font-weight: 800;
+    text-decoration: none;
+    z-index: 1000;
+}
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
 
     .top-bar {
-        flex-direction: column;
-        gap: 15px;
-        text-align: center;
-        padding: 20px;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 15px 20px;
+    }
+
+    .top-left {
+        display: none; /* 🔥 más limpio */
+    }
+
+    .top-right {
+        display: none; /* 🔥 lo reemplaza botón fijo */
     }
 
     .navbar-wrapper {
-        padding: 10px 20px;
+        padding: 0 20px;
     }
 
     .menu {
@@ -169,16 +183,20 @@
 
     .menu-toggle {
         display: block;
-        position: absolute;
-        right: 20px;
     }
 
+    .logo-center img {
+        height: 50px;
+    }
+
+    .call-fixed {
+        display: block;
+    }
 }
 </style>
 
 <div class="header-bg">
 
-    <!-- TOP -->
     <div class="top-bar">
 
         <div class="top-left">
@@ -193,18 +211,11 @@
 
         <div class="top-right">
             <i class="fas fa-phone phone-icon"></i>
-            <div>
-                <div class="call-text">CALL US NOW</div>
-                <div class="phone-group">
-                    <a href="tel:+13057130381" class="phone">+1 (305) 713-0381</a>
-                    <a href="tel:+13056840149" class="phone">+1 (305) 684-0149</a>
-                </div>
-            </div>
+            <a href="tel:+13057130381" class="phone">+1 (305) 713-0381</a>
         </div>
 
     </div>
 
-    <!-- NAVBAR -->
     <div class="navbar-wrapper">
         <div class="navbar">
 
@@ -215,9 +226,8 @@
                 <a href="#">Testimonials</a>
             </div>
 
-            <!-- HAMBURGUESA -->
             <div class="menu-toggle" onclick="toggleMenu()">
-                <i class="fas fa-bars"></i>
+                <i id="menuIcon" class="fas fa-bars"></i>
             </div>
 
         </div>
@@ -235,10 +245,25 @@
 
 <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
+<!-- BOTÓN FIJO -->
+<a href="tel:+13057130381" class="call-fixed">
+    CALL NOW
+</a>
+
 <script>
 function toggleMenu() {
-    document.getElementById("mobileMenu").classList.toggle("active");
-    document.getElementById("overlay").classList.toggle("active");
+    const menu = document.getElementById("mobileMenu");
+    const overlay = document.getElementById("overlay");
+    const icon = document.getElementById("menuIcon");
+
+    menu.classList.toggle("active");
+    overlay.classList.toggle("active");
+
+    if(menu.classList.contains("active")){
+        icon.classList.replace("fa-bars","fa-xmark");
+    } else {
+        icon.classList.replace("fa-xmark","fa-bars");
+    }
 }
 </script>
 <!-- FONT + ICONS -->

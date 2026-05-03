@@ -3,16 +3,15 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap');
 
-body {
-    margin: 0;
-    font-family: 'Montserrat', sans-serif;
-}
-
-/* HEADER */
+/* BASE */
 .header-bg {
-    background: linear-gradient(rgba(255,255,255,0.95), rgba(255,255,255,0.95)),
+    background: linear-gradient(rgba(255,255,255,0.92), rgba(255,255,255,0.92)),
     url('https://www.transparenttextures.com/patterns/bubbles.png');
-    padding-bottom: 20px;
+    padding-bottom: 25px;
+    font-family: 'Montserrat', sans-serif;
+    position: sticky;
+    top: 0;
+    z-index: 999;
 }
 
 /* TOP */
@@ -20,252 +19,198 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 60px;
+    padding: 20px 80px;
 }
 
 /* REDES */
 .top-left {
     display: flex;
-    gap: 12px;
+    gap: 15px;
 }
 
 .top-left a {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     background: #00aeee;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 8px;
+    border-radius: 10px;
     color: #fff;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.top-left a:hover {
+    transform: translateY(-3px) scale(1.08);
+    background: #0095d1;
 }
 
 /* LOGO */
 .logo-center img {
-    height: 65px;
+    height: 70px;
 }
 
 /* TEL */
 .top-right {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
 }
 
 .phone-icon {
     color: #00aeee;
+    font-size: 24px;
+}
+
+.call-text {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.phone-group {
+    display: flex;
+    flex-direction: column;
 }
 
 .phone {
+    font-size: 20px;
     font-weight: 800;
     color: #020001;
     text-decoration: none;
 }
 
-/* NAV */
+.phone:hover {
+    color: #00aeee;
+}
+
+/* NAVBAR */
 .navbar-wrapper {
-    padding: 10px 60px;
+    padding: 15px 80px;
 }
 
 .navbar {
     background: #f1f1f1;
-    border-radius: 50px;
-    padding: 15px 30px;
+    border-radius: 60px;
+    padding: 20px 40px;
     display: flex;
     justify-content: center;
-    position: relative;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
 }
 
-/* MENU DESKTOP */
+/* MENU */
 .menu {
     display: flex;
-    gap: 35px;
+    gap: 45px;
 }
 
 .menu a {
     text-decoration: none;
-    font-weight: 800;
     color: #020001;
-}
-
-/* HAMBURGUESA */
-.menu-toggle {
-    display: none;
-    position: absolute;
-    right: 20px;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-/* MOBILE MENU */
-.mobile-menu {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 80%;
-    height: 100%;
-    background: #ffffff;
-    padding: 50px 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    transition: 0.4s;
-    z-index: 999;
-}
-
-.mobile-menu a {
-    font-size: 22px;
+    font-size: 17px;
     font-weight: 800;
-    color: #020001;
-    text-decoration: none;
-}
-
-.mobile-menu.active {
-    right: 0;
-}
-
-/* OVERLAY */
-.overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.4);
-    opacity: 0;
-    pointer-events: none;
+    letter-spacing: 0.5px;
+    position: relative;
     transition: 0.3s;
-    z-index: 998;
 }
 
-.overlay.active {
-    opacity: 1;
-    pointer-events: all;
-}
-
-/* BOTÓN FIJO MOBILE */
-.call-fixed {
-    display: none;
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+/* HOVER */
+.menu a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 0%;
+    height: 3px;
     background: #00aeee;
-    color: #fff;
-    padding: 15px 25px;
-    border-radius: 50px;
-    font-weight: 800;
-    text-decoration: none;
-    z-index: 1000;
+    transition: 0.3s;
+}
+
+.menu a:hover {
+    color: #00aeee;
+}
+
+.menu a:hover::after {
+    width: 100%;
+}
+
+/* 🔥 ACTIVO */
+.menu a.active {
+    color: #00aeee;
+}
+
+.menu a.active::after {
+    width: 100%;
 }
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
-
     .top-bar {
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 15px 20px;
-    }
-
-    .top-left {
-        display: none; /* 🔥 más limpio */
-    }
-
-    .top-right {
-        display: none; /* 🔥 lo reemplaza botón fijo */
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+        padding: 20px;
     }
 
     .navbar-wrapper {
-        padding: 0 20px;
+        padding: 10px 20px;
     }
 
     .menu {
-        display: none;
-    }
-
-    .menu-toggle {
-        display: block;
-    }
-
-    .logo-center img {
-        height: 50px;
-    }
-
-    .call-fixed {
-        display: block;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
     }
 }
 </style>
 
 <div class="header-bg">
 
+    <!-- TOP -->
     <div class="top-bar">
 
+        <!-- REDES -->
         <div class="top-left">
             <a href="#"><i class="fab fa-facebook-f"></i></a>
             <a href="#"><i class="fab fa-tiktok"></i></a>
             <a href="#"><i class="fab fa-instagram"></i></a>
         </div>
 
+        <!-- LOGO -->
         <div class="logo-center">
-            <img src="https://pandcplumbing.com/wp-content/uploads/2025/04/Diseno-sin-titulo-2.png">
+            <img src="https://pandcplumbing.com/wp-content/uploads/2025/04/Diseno-sin-titulo-2.png" alt="Logo">
         </div>
 
+        <!-- TELÉFONOS -->
         <div class="top-right">
             <i class="fas fa-phone phone-icon"></i>
-            <a href="tel:+13057130381" class="phone">+1 (305) 713-0381</a>
+            <div>
+                <div class="call-text">CALL US NOW</div>
+                <div class="phone-group">
+                    <a href="tel:+13057130381" class="phone">+1 (305) 713-0381</a>
+                    <a href="tel:+13056840149" class="phone">+1 (305) 684-0149</a>
+                </div>
+            </div>
         </div>
 
     </div>
 
+    <!-- NAVBAR -->
     <div class="navbar-wrapper">
         <div class="navbar">
 
             <div class="menu">
-                <a href="#">Home</a>
+                <a href="#" class="active">Home</a>
                 <a href="#">About Us</a>
                 <a href="#">Services</a>
                 <a href="#">Testimonials</a>
-            </div>
-
-            <div class="menu-toggle" onclick="toggleMenu()">
-                <i id="menuIcon" class="fas fa-bars"></i>
+                <a href="#">Contact</a>
             </div>
 
         </div>
     </div>
 
 </div>
-
-<!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu">
-    <a href="#">Home</a>
-    <a href="#">About Us</a>
-    <a href="#">Services</a>
-    <a href="#">Testimonials</a>
-</div>
-
-<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
-
-<!-- BOTÓN FIJO -->
-<a href="tel:+13057130381" class="call-fixed">
-    CALL NOW
-</a>
-
-<script>
-function toggleMenu() {
-    const menu = document.getElementById("mobileMenu");
-    const overlay = document.getElementById("overlay");
-    const icon = document.getElementById("menuIcon");
-
-    menu.classList.toggle("active");
-    overlay.classList.toggle("active");
-
-    if(menu.classList.contains("active")){
-        icon.classList.replace("fa-bars","fa-xmark");
-    } else {
-        icon.classList.replace("fa-xmark","fa-bars");
-    }
-}
-</script>
 <!-- FONT + ICONS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -660,7 +605,7 @@ function playHeroVideo(){
 }
 
 .ba-container {
-    max-width: 700px; /* 🔥 más estrecho = más elegante */
+    max-width: 700px; /* ðŸ”¥ mÃ¡s estrecho = mÃ¡s elegante */
     margin: auto;
 }
 
@@ -675,7 +620,7 @@ function playHeroVideo(){
     margin-bottom: 50px;
 }
 
-/* 🔥 STACK VERTICAL */
+/* ðŸ”¥ STACK VERTICAL */
 .ba-grid {
     display: flex;
     flex-direction: column;
@@ -699,7 +644,7 @@ function playHeroVideo(){
     cursor: ew-resize;
 }
 
-/* IMÁGENES */
+/* IMÃGENES */
 .ba-slider img {
     position: absolute;
     width: 100%;
@@ -717,7 +662,7 @@ function playHeroVideo(){
     clip-path: inset(0 50% 0 0);
 }
 
-/* LÍNEA */
+/* LÃNEA */
 .ba-line {
     position: absolute;
     top: 0;
@@ -728,7 +673,7 @@ function playHeroVideo(){
     z-index: 3;
 }
 
-/* BOTÓN */
+/* BOTÃ“N */
 .ba-circle {
     position: absolute;
     top: 50%;
@@ -796,7 +741,7 @@ function playHeroVideo(){
                     </div>
 
                     <div class="ba-line"></div>
-                    <div class="ba-circle">⇄</div>
+                    <div class="ba-circle">â‡„</div>
 
                     <span class="ba-label ba-before-label">BEFORE</span>
                     <span class="ba-label ba-after-label">AFTER</span>
@@ -817,7 +762,7 @@ function playHeroVideo(){
                     </div>
 
                     <div class="ba-line"></div>
-                    <div class="ba-circle">⇄</div>
+                    <div class="ba-circle">â‡„</div>
 
                     <span class="ba-label ba-before-label">BEFORE</span>
                     <span class="ba-label ba-after-label">AFTER</span>
@@ -838,7 +783,7 @@ function playHeroVideo(){
                     </div>
 
                     <div class="ba-line"></div>
-                    <div class="ba-circle">⇄</div>
+                    <div class="ba-circle">â‡„</div>
 
                     <span class="ba-label ba-before-label">BEFORE</span>
                     <span class="ba-label ba-after-label">AFTER</span>
@@ -891,3 +836,732 @@ document.querySelectorAll('[data-slider]').forEach(slider => {
     window.addEventListener('touchend', () => dragging = false);
 });
 </script>
+<style>
+.service-areas {
+    padding: 100px 20px;
+    background: #f9fbfd;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+}
+
+.sa-container {
+    max-width: 1100px;
+    margin: auto;
+}
+
+.sa-title {
+    font-size: 34px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: #020001;
+}
+
+.sa-sub {
+    color: #666;
+    margin-bottom: 60px;
+}
+
+/* GRID */
+.sa-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+}
+
+/* CARD */
+.sa-card {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 18px;
+    transition: 0.3s;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+    border: 1px solid transparent;
+}
+
+.sa-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    border: 1px solid #00aeee; /* 🔥 acento institucional */
+}
+
+/* IMAGE */
+.sa-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+/* TITLE */
+.sa-card h3 {
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: #020001;
+    transition: 0.3s;
+}
+
+/* TEXTO */
+.sa-card p {
+    font-size: 13px;
+    color: #666;
+}
+
+/* 🔥 HOVER BRAND */
+.sa-card:hover h3 {
+    color: #00aeee;
+}
+
+/* DETALLE DECORATIVO */
+.sa-card::after {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 4px;
+    background: #00aeee;
+    margin: 15px auto 0;
+    border-radius: 10px;
+    opacity: 0.3;
+    transition: 0.3s;
+}
+
+.sa-card:hover::after {
+    width: 70px;
+    opacity: 1;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .sa-title {
+        font-size: 28px;
+    }
+}
+</style>
+
+<section class="service-areas">
+
+    <div class="sa-container">
+
+        <h2 class="sa-title">Service Areas</h2>
+        <p class="sa-sub">Providing reliable plumbing services across South Florida.</p>
+
+        <div class="sa-grid">
+
+            <div class="sa-card">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c">
+                <h3>Doral, FL</h3>
+                <p>Fast and reliable plumbing services available 24/7.</p>
+            </div>
+
+            <div class="sa-card">
+                <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2">
+                <h3>Kendall, FL</h3>
+                <p>Expert plumbers ready for any residential or commercial need.</p>
+            </div>
+
+            <div class="sa-card">
+                <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea">
+                <h3>Coral Gables, FL</h3>
+                <p>Quick response for repairs, installations and emergencies.</p>
+            </div>
+
+            <div class="sa-card">
+                <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952">
+                <h3>West Miami, FL</h3>
+                <p>Certified plumbers delivering high-quality service.</p>
+            </div>
+
+            <div class="sa-card">
+                <img src="https://images.unsplash.com/photo-1556912173-3bb406ef7e77">
+                <h3>Hialeah, FL</h3>
+                <p>Reliable plumbing solutions tailored to your needs.</p>
+            </div>
+
+            <div class="sa-card">
+                <img src="https://images.unsplash.com/photo-1621905251918-48416bd8575a">
+                <h3>Coconut Grove, FL</h3>
+                <p>Professional plumbing services with fast turnaround.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<style>
+.testimonials {
+    padding: 100px 20px;
+    background: #f9fbfd;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+}
+
+.t-container {
+    max-width: 1100px;
+    margin: auto;
+}
+
+.t-title {
+    font-size: 34px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: #020001;
+}
+
+.t-sub {
+    color: #666;
+    margin-bottom: 50px;
+}
+
+/* SCORE */
+.t-score {
+    margin-bottom: 40px;
+}
+
+.t-score strong {
+    font-size: 22px;
+}
+
+.t-stars-big {
+    color: #ffc107;
+    font-size: 20px;
+    margin: 5px 0;
+}
+
+.t-google {
+    font-size: 14px;
+    color: #555;
+}
+
+/* GRID */
+.t-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+/* CARD */
+.t-card {
+    background: #fff;
+    padding: 22px;
+    border-radius: 15px;
+    text-align: left;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    transition: 0.3s;
+    border: 1px solid transparent;
+}
+
+.t-card:hover {
+    transform: translateY(-6px);
+    border-color: #00aeee;
+}
+
+/* HEADER */
+.t-user {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.t-user-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.t-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #00aeee;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+}
+
+.t-name {
+    font-weight: 800;
+    font-size: 14px;
+}
+
+/* GOOGLE LOGO */
+.t-google-logo {
+    width: 18px;
+}
+
+/* STARS */
+.t-stars {
+    color: #ffc107;
+    margin-bottom: 10px;
+}
+
+/* TEXT */
+.t-text {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+}
+</style>
+
+<section class="testimonials">
+
+    <div class="t-container">
+
+        <h2 class="t-title">What Our Clients Say</h2>
+        <p class="t-sub">Trusted by homeowners across South Florida.</p>
+
+        <!-- SCORE -->
+        <div class="t-score">
+            <strong>EXCELLENT</strong>
+            <div class="t-stars-big">★★★★★</div>
+            <div class="t-google">Based on 45 reviews · Google</div>
+        </div>
+
+        <!-- GRID -->
+        <div class="t-grid">
+
+            <!-- CARD -->
+            <div class="t-card">
+                <div class="t-user">
+                    <div class="t-user-left">
+                        <div class="t-avatar">J</div>
+                        <div class="t-name">Jose Suarez</div>
+                    </div>
+                    <img class="t-google-logo" src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg">
+                </div>
+                <div class="t-stars">★★★★★</div>
+                <div class="t-text">
+                    Pedro was great to deal with. Had a late night emergency and he came right away and took care of everything quickly and professionally.
+                </div>
+            </div>
+
+            <!-- CARD -->
+            <div class="t-card">
+                <div class="t-user">
+                    <div class="t-user-left">
+                        <div class="t-avatar">J</div>
+                        <div class="t-name">Jeremy Fernandez</div>
+                    </div>
+                    <img class="t-google-logo" src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg">
+                </div>
+                <div class="t-stars">★★★★★</div>
+                <div class="t-text">
+                    P&C renovated my home. The price was fair and the quality of work was excellent. Very professional and reliable team.
+                </div>
+            </div>
+
+            <!-- CARD -->
+            <div class="t-card">
+                <div class="t-user">
+                    <div class="t-user-left">
+                        <div class="t-avatar">M</div>
+                        <div class="t-name">Meagan Torres</div>
+                    </div>
+                    <img class="t-google-logo" src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg">
+                </div>
+                <div class="t-stars">★★★★★</div>
+                <div class="t-text">
+                    Amazing service! Fast response and very friendly staff. Highly recommend them for any plumbing work.
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<style>
+.cta-final {
+    padding: 100px 20px;
+    background: #00aeee;
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+/* CONTENEDOR */
+.cta-container {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    color: #fff;
+}
+
+/* TEXTO */
+.cta-text {
+    width: 50%;
+}
+
+.cta-text h2 {
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.cta-text p {
+    font-size: 16px;
+    margin-bottom: 25px;
+}
+
+/* BENEFICIOS */
+.cta-list div {
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+/* BOTONES */
+.cta-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.cta-btn {
+    padding: 14px 28px;
+    border-radius: 40px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+/* CALL */
+.cta-call {
+    background: #fff;
+    color: #00aeee;
+}
+
+.cta-call:hover {
+    transform: translateY(-2px);
+}
+
+/* QUOTE */
+.cta-quote {
+    border: 2px solid #fff;
+    color: #fff;
+}
+
+.cta-quote:hover {
+    background: #fff;
+    color: #00aeee;
+}
+
+/* FORM */
+.cta-form {
+    width: 45%;
+    backdrop-filter: blur(12px);
+    background: rgba(255,255,255,0.1);
+    padding: 30px;
+    border-radius: 20px;
+}
+
+.cta-form h3 {
+    margin-bottom: 20px;
+}
+
+/* INPUTS */
+.cta-form input,
+.cta-form textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    margin-bottom: 12px;
+    font-family: inherit;
+}
+
+/* BUTTON */
+.cta-submit {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 30px;
+    background: #fff;
+    color: #00aeee;
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cta-submit:hover {
+    transform: scale(1.03);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .cta-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .cta-text,
+    .cta-form {
+        width: 100%;
+    }
+
+    .cta-text h2 {
+        font-size: 30px;
+    }
+
+    .cta-buttons {
+        justify-content: center;
+    }
+}
+</style>
+
+<section class="cta-final">
+
+    <div class="cta-container">
+
+        <!-- TEXTO -->
+        <div class="cta-text">
+
+            <h2>
+            Need a Reliable Plumber in South Florida?
+            </h2>
+
+            <p>
+            Whether it’s an emergency or a planned project, our expert team is ready to help you fast, professionally, and at a fair price.
+            </p>
+
+            <div class="cta-list">
+                <div>✔ 24/7 Emergency Service</div>
+                <div>✔ Residential & Commercial</div>
+                <div>✔ Fast Response Time</div>
+            </div>
+
+            <div class="cta-buttons">
+                <a href="tel:+13057130381" class="cta-btn cta-call">CALL NOW</a>
+                <a href="#form" class="cta-btn cta-quote">GET A QUOTE</a>
+            </div>
+
+        </div>
+
+        <!-- FORM -->
+        <div class="cta-form" id="form">
+
+            <h3>Get a Free Quote</h3>
+
+            <form>
+                <input type="text" placeholder="Full Name" required>
+                <input type="tel" placeholder="Phone Number" required>
+                <input type="email" placeholder="Email Address">
+                <textarea rows="4" placeholder="Describe your issue..."></textarea>
+                <button class="cta-submit">Request Quote</button>
+            </form>
+
+        </div>
+
+    </div>
+
+</section><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+.footer {
+    background: #020001;
+    color: #fefefe;
+    padding: 70px 20px 30px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.footer-container {
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* MENU */
+.footer-menu {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+}
+
+.footer-menu a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 700;
+}
+
+.footer-menu a:hover {
+    color: #00aeee;
+}
+
+/* GRID */
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px;
+}
+
+/* 🔥 LOGO FIX */
+.footer-logo-box {
+    background: #fff;
+    padding: 10px 15px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.footer-logo-box img {
+    width: 150px;
+}
+
+/* TEXT */
+.footer-text {
+    font-size: 14px;
+    color: #ccc;
+    line-height: 1.6;
+}
+
+/* TITLES */
+.footer h4 {
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: 800;
+    color: #00aeee;
+}
+
+/* LINKS */
+.footer a {
+    display: block;
+    text-decoration: none;
+    color: #ccc;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.footer a:hover {
+    color: #00aeee;
+}
+
+/* CONTACT */
+.footer-contact div {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.footer-contact i {
+    color: #00aeee;
+    margin-right: 8px;
+}
+
+/* SOCIAL */
+.footer-social {
+    display: flex;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.footer-social a {
+    width: 38px;
+    height: 38px;
+    background: #00aeee;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+/* BOTTOM */
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin-top: 50px;
+    padding-top: 20px;
+    text-align: center;
+    font-size: 13px;
+    color: #aaa;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .footer {
+        text-align: center;
+    }
+
+    .footer-social {
+        justify-content: center;
+    }
+}
+</style>
+
+<footer class="footer">
+
+    <div class="footer-container">
+
+        <!-- MENU -->
+        <div class="footer-menu">
+            <a href="#">Home</a>
+            <a href="#">About Us</a>
+            <a href="#">Services</a>
+            <a href="#">Testimonials</a>
+            <a href="#">Contact</a>
+        </div>
+
+        <div class="footer-grid">
+
+            <!-- LOGO -->
+            <div>
+                <div class="footer-logo-box">
+                    <img src="https://pandcplumbing.com/wp-content/uploads/2025/04/Diseno-sin-titulo-2.png">
+                </div>
+
+                <div class="footer-text">
+                    P&C delivers elite, full-service plumbing solutions across South Florida. Reliable, fast and professional service you can trust.
+                </div>
+
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+
+            <!-- SERVICES -->
+            <div>
+                <h4>Services</h4>
+                <a href="#">General Plumbing Repairs</a>
+                <a href="#">Emergency Services</a>
+                <a href="#">Full Installations</a>
+                <a href="#">Remodeling</a>
+                <a href="#">New Construction</a>
+                <a href="#">Preventive Care</a>
+            </div>
+
+            <!-- AREAS -->
+            <div>
+                <h4>Service Areas</h4>
+                <a href="#">Miami</a>
+                <a href="#">Doral</a>
+                <a href="#">Kendall</a>
+                <a href="#">Hialeah</a>
+                <a href="#">Coral Gables</a>
+            </div>
+
+            <!-- CONTACT -->
+            <div class="footer-contact">
+                <h4>Contact</h4>
+                <div><i class="fas fa-phone"></i> <a href="tel:+13057130381">+1 (305) 713-0381</a></div>
+                <div><i class="fas fa-phone"></i> <a href="tel:+13056840149">+1 (305) 684-0149</a></div>
+                <div><i class="fas fa-location-dot"></i> South Florida</div>
+                <div><i class="fas fa-envelope"></i> info@pandcplumbing.com</div>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            © 2025 P&C Plumbing. All rights reserved.
+        </div>
+
+    </div>
+
+</footer>
